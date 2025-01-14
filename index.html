@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我们的恋爱日记 ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>✨ 我们的恋爱日记 ✨</h1>
+        <p class="subtitle">记录每一个甜蜜瞬间</p>
+        <!-- 音乐播放器 -->
+        <div class="music-player">
+          <audio id="audioPlayer" controls>
+            <source
+              src="C:\Users\12620\Desktop\网页\music\陈奕迅 - 无条件.mp3"
+              type="audio/mpeg"
+            />
+            您的浏览器不支持音频播放。
+          </audio>
+        </div>
+      </header>
+
+      <nav>
+        <a href="#" class="nav-item active">首页</a>
+        <a href="photos.html" class="nav-item">照片墙</a>
+        <a href="wishlist.html" class="nav-item">想做的事</a>
+        <a href="anniversary.html" class="nav-item">纪念日</a>
+      </nav>
+
+      <main>
+        <!-- 添加日记的表单 -->
+        <div class="add-diary">
+          <div class="action-buttons">
+            <button class="add-button" onclick="toggleForm()">
+              ✏️ 写下今天的故事
+            </button>
+            <button class="search-button" onclick="toggleSearch()">
+              🔍 搜索日记
+            </button>
+          </div>
+
+          <!-- 搜索表单 -->
+          <div id="searchForm" class="search-form hidden">
+            <div class="search-box">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="搜索日记..."
+                oninput="searchDiaries()"
+              />
+              <div class="search-options">
+                <label>
+                  <input
+                    type="checkbox"
+                    id="searchTitle"
+                    checked
+                    onchange="searchDiaries()"
+                  />
+                  标题
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    id="searchContent"
+                    checked
+                    onchange="searchDiaries()"
+                  />
+                  内容
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    id="searchTags"
+                    checked
+                    onchange="searchDiaries()"
+                  />
+                  标签
+                </label>
+              </div>
+            </div>
+            <div class="date-filter">
+              <input type="date" id="startDate" onchange="searchDiaries()" />
+              <span>至</span>
+              <input type="date" id="endDate" onchange="searchDiaries()" />
+            </div>
+            <div id="activeFilters" class="active-filters"></div>
+          </div>
+
+          <!-- 添加日记的表单 -->
+          <form id="diaryForm" class="diary-form hidden">
+            <input type="date" id="diaryDate" required />
+            <input type="text" id="diaryTitle" placeholder="标题" required />
+            <textarea
+              id="diaryContent"
+              placeholder="今天发生了什么呢..."
+              required
+            ></textarea>
+            <div class="tag-input">
+              <input
+                type="text"
+                id="tagInput"
+                placeholder="添加标签（回车确认）"
+              />
+              <div id="selectedTags" class="selected-tags"></div>
+            </div>
+            <div class="form-buttons">
+              <button type="submit">保存 💝</button>
+              <button type="button" onclick="toggleForm()">取消</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 现有的日记内容 -->
+        <div id="diaryList">
+          <div class="diary-entry" data-id="1">
+            <div class="diary-header">
+              <div class="date">2024年11月16日</div>
+              <div class="diary-actions">
+                <button
+                  class="edit-btn"
+                  onclick="editDiary(this.closest('.diary-entry'))"
+                >
+                  ✎
+                </button>
+                <button
+                  class="delete-btn"
+                  onclick="deleteDiary(this.closest('.diary-entry'))"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+            <h2>今天是我们在一起的第1天 💕</h2>
+            <p>今天小羊同学来到了小黄同学身边...</p>
+            <div class="tags">
+              <span class="tag">约会</span>
+              <span class="tag">见面</span>
+              <span class="tag">纪念日</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
