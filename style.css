@@ -1,0 +1,844 @@
+:root {
+  --primary-color: #ff9ecd;
+  --secondary-color: #ffd6e7;
+  --text-color: #4a4a4a;
+  --background-color: #fff9fb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 40px 0;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--text-color);
+  font-size: 1.2em;
+  opacity: 0.8;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.diary-entry {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.date {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tags {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.tag {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+}
+
+.add-diary {
+  margin-bottom: 30px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.add-button,
+.search-button {
+  flex: 1;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.search-button {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.add-button:hover,
+.search-button:hover {
+  transform: translateY(-2px);
+}
+
+.search-button:hover {
+  background-color: #ffc4db;
+}
+
+.diary-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.diary-form.hidden {
+  display: none;
+}
+
+.diary-form input[type="text"],
+.diary-form input[type="date"],
+.diary-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.diary-form textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.form-buttons button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-buttons button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.form-buttons button[type="button"] {
+  background-color: #e0e0e0;
+  color: var(--text-color);
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.diary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.diary-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+.diary-form button[type="submit"].update-mode {
+  background-color: #4caf50;
+}
+
+.diary-form button.cancel-edit {
+  background-color: #ff4444;
+  color: white;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #ffe0e0;
+  transform: scale(1.1);
+}
+
+/* 添加删除确认对话框样式 */
+.delete-confirm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  z-index: 1000;
+}
+
+.delete-confirm p {
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+.delete-confirm .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.delete-confirm button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-confirm .confirm-delete {
+  background-color: #ff4444;
+  color: white;
+}
+
+.delete-confirm .cancel-delete {
+  background-color: #e0e0e0;
+  color: var(--text-color);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* 搜索区域样式 */
+.search-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-box {
+  margin-bottom: 15px;
+}
+
+.search-box input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.search-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.search-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.date-filter input[type="date"] {
+  padding: 8px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  color: var(--text-color);
+}
+
+.date-filter span {
+  color: var(--text-color);
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-tag {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-tag button {
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1.1em;
+  padding: 0 2px;
+}
+
+/* 搜索结果高亮样式 */
+.highlight {
+  background-color: #fff3cd;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+/* 无搜索结果样式 */
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-color);
+  font-style: italic;
+}
+
+/* 搜索表单样式 */
+.search-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-form.hidden {
+  display: none;
+}
+
+/* 照片墙样式 */
+.photo-wall {
+  margin-top: 20px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.photo-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-5px);
+}
+
+.photo-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.photo-card:hover img {
+  transform: scale(1.05);
+}
+
+.photo-info {
+  padding: 15px;
+}
+
+.photo-info h3 {
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.photo-info p {
+  color: var(--text-color);
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+/* 照片表单样式 */
+.photo-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.photo-preview {
+  width: 100%;
+  height: 300px;
+  border: 2px dashed var(--secondary-color);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-prompt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+}
+
+.upload-prompt span {
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.upload-prompt input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 纪念日墙样式 */
+.anniversary-wall {
+  margin-top: 20px;
+}
+
+.anniversary-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.anniversary-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.anniversary-card:hover {
+  transform: translateY(-5px);
+}
+
+.anniversary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.anniversary-type {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.anniversary-card h3 {
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.countdown {
+  margin: 20px 0;
+}
+
+.countdown-number {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.countdown-text {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.anniversary-date {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.anniversary-desc {
+  color: var(--text-color);
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+/* 纪念日表单样式 */
+.anniversary-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.anniversary-form.hidden {
+  display: none;
+}
+
+.anniversary-form input,
+.anniversary-form select,
+.anniversary-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.anniversary-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+  .anniversary-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 视频按钮样式 */
+.video-button {
+  background-color: #9e84ff;
+}
+
+.video-button:hover {
+  background-color: #8b6fff;
+}
+
+/* 视频卡片样式 */
+.video-card .video-container {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 视频预览样式 */
+.video-preview {
+  width: 100%;
+  height: 300px;
+  border: 2px dashed var(--secondary-color);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+/* 视频播放按钮样式 */
+.video-container::before {
+  content: "▶️";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  opacity: 0.8;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.video-container:hover::before {
+  opacity: 1;
+}
+
+/* 心愿墙样式 */
+.wishlist-wall {
+  margin-top: 20px;
+}
+
+.wish-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.wish-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.wish-card:hover {
+  transform: translateY(-5px);
+}
+
+.wish-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.wish-priority {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.wish-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.complete-btn {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.complete-btn:hover {
+  background-color: #e8f5e9;
+  transform: scale(1.1);
+}
+
+.wish-card h3 {
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.wish-card p {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+.wish-status {
+  font-size: 0.9em;
+  padding: 4px 12px;
+  border-radius: 15px;
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.wish-card.completed {
+  opacity: 0.7;
+}
+
+.wish-card.completed h3 {
+  text-decoration: line-through;
+}
+
+.wish-card.completed .wish-status {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* 心愿表单样式 */
+.wish-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.wish-form.hidden {
+  display: none;
+}
+
+.wish-form input,
+.wish-form select,
+.wish-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.wish-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* 优先级样式 */
+.wish-card[data-priority="high"] {
+  border-left: 4px solid #ff4081;
+}
+
+.wish-card[data-priority="medium"] {
+  border-left: 4px solid #ffd54f;
+}
+
+.wish-card[data-priority="low"] {
+  border-left: 4px solid #90caf9;
+}
+
+.music-player {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.music-player audio {
+  width: 250px;
+}

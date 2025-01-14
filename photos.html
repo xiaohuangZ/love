@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>照片墙 - 我们的恋爱日记 ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>✨ 我们的照片墙 ✨</h1>
+        <p class="subtitle">记录每一个美好瞬间</p>
+        <!-- 音乐播放器 -->
+        <div class="music-player">
+          <audio id="audioPlayer" controls>
+            <source
+              src="C:\Users\12620\Desktop\网页\music\陈奕迅 - 无条件.mp3"
+              type="audio/mpeg"
+            />
+            您的浏览器不支持音频播放。
+          </audio>
+        </div>
+      </header>
+
+      <nav>
+        <a href="index.html" class="nav-item">首页</a>
+        <a href="photos.html" class="nav-item active">照片墙</a>
+        <a href="wishlist.html" class="nav-item">想做的事</a>
+        <a href="anniversary.html" class="nav-item">纪念日</a>
+      </nav>
+
+      <main>
+        <div class="photo-wall">
+          <!-- 添加按钮 -->
+          <div class="add-photo">
+            <div class="action-buttons">
+              <button class="add-button" onclick="togglePhotoForm()">
+                📸 添加新照片
+              </button>
+              <button
+                class="add-button video-button"
+                onclick="toggleVideoForm()"
+              >
+                🎥 添加新视频
+              </button>
+            </div>
+          </div>
+
+          <!-- 添加照片的表单 -->
+          <form id="photoForm" class="photo-form hidden">
+            <div class="photo-preview">
+              <img id="imagePreview" src="#" alt="预览图" class="hidden" />
+              <div id="uploadPrompt" class="upload-prompt">
+                <span>点击或拖拽上传照片</span>
+                <input type="file" id="photoInput" accept="image/*" required />
+              </div>
+            </div>
+            <input type="date" id="photoDate" required />
+            <input
+              type="text"
+              id="photoTitle"
+              placeholder="给这张照片起个标题吧"
+              required
+            />
+            <textarea
+              id="photoDescription"
+              placeholder="这张照片背后的故事..."
+            ></textarea>
+            <div class="form-buttons">
+              <button type="submit">保存 💝</button>
+              <button type="button" onclick="togglePhotoForm()">取消</button>
+            </div>
+          </form>
+
+          <!-- 添加视频的表单 -->
+          <form id="videoForm" class="photo-form hidden">
+            <div class="video-preview">
+              <video id="videoPreview" controls class="hidden"></video>
+              <div id="videoUploadPrompt" class="upload-prompt">
+                <span>点击或拖拽上传视频</span>
+                <input type="file" id="videoInput" accept="video/*" required />
+              </div>
+            </div>
+            <input type="date" id="videoDate" required />
+            <input
+              type="text"
+              id="videoTitle"
+              placeholder="给这个视频起个标题吧"
+              required
+            />
+            <textarea
+              id="videoDescription"
+              placeholder="这个视频记录了什么..."
+            ></textarea>
+            <div class="form-buttons">
+              <button type="submit">保存 💝</button>
+              <button type="button" onclick="toggleVideoForm()">取消</button>
+            </div>
+          </form>
+
+          <!-- 照片网格 -->
+          <div id="photoGrid" class="photo-grid">
+            <!-- 示例照片 -->
+            <div class="photo-card">
+              <div class="photo-header">
+                <span class="date">2024年3月20日</span>
+                <div class="photo-actions">
+                  <button
+                    class="edit-btn"
+                    onclick="editPhoto(this.closest('.photo-card'))"
+                  >
+                    ✎
+                  </button>
+                  <button
+                    class="delete-btn"
+                    onclick="deletePhoto(this.closest('.photo-card'))"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+              <img src="https://picsum.photos/300/400" alt="示例照片" />
+              <div class="photo-info">
+                <h3>樱花季的我们</h3>
+                <p>在樱花纷飞的季节，记录下我们最美的瞬间 🌸</p>
+              </div>
+            </div>
+            <!-- 示例视频 -->
+            <div class="photo-card video-card">
+              <div class="photo-header">
+                <span class="date">2024年3月21日</span>
+                <div class="photo-actions">
+                  <button
+                    class="edit-btn"
+                    onclick="editVideo(this.closest('.video-card'))"
+                  >
+                    ✎
+                  </button>
+                  <button
+                    class="delete-btn"
+                    onclick="deleteVideo(this.closest('.video-card'))"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+              <div class="video-container">
+                <video
+                  src="example.mp4"
+                  controls
+                  poster="video-thumbnail.jpg"
+                ></video>
+              </div>
+              <div class="photo-info">
+                <h3>第一次约会</h3>
+                <p>记录下我们甜蜜的瞬间 🎬</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="config.js"></script>
+    <script src="photos.js"></script>
+  </body>
+</html>

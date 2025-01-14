@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>想做的事 - 我们的恋爱日记 ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>✨ 我们想做的事 ✨</h1>
+        <p class="subtitle">记录下所有想一起完成的心愿</p>
+        <!-- 音乐播放器 -->
+        <div class="music-player">
+          <audio id="audioPlayer" controls>
+            <source
+              src="C:\Users\12620\Desktop\网页\music\陈奕迅 - 无条件.mp3"
+              type="audio/mpeg"
+            />
+            您的浏览器不支持音频播放。
+          </audio>
+        </div>
+      </header>
+
+      <nav>
+        <a href="index.html" class="nav-item">首页</a>
+        <a href="photos.html" class="nav-item">照片墙</a>
+        <a href="wishlist.html" class="nav-item active">想做的事</a>
+        <a href="anniversary.html" class="nav-item">纪念日</a>
+      </nav>
+
+      <main>
+        <div class="wishlist-wall">
+          <!-- 添加心愿按钮 -->
+          <div class="add-wish">
+            <button class="add-button" onclick="toggleWishForm()">
+              💫 添加新心愿
+            </button>
+          </div>
+
+          <!-- 添加心愿的表单 -->
+          <form id="wishForm" class="wish-form hidden">
+            <input
+              type="text"
+              id="wishTitle"
+              placeholder="我们想要..."
+              required
+            />
+            <textarea
+              id="wishDescription"
+              placeholder="具体想怎么做..."
+            ></textarea>
+            <select id="wishPriority" required>
+              <option value="high">迫不及待 ✨</option>
+              <option value="medium">有机会就做 🌟</option>
+              <option value="low">以后再说 ⭐</option>
+            </select>
+            <div class="form-buttons">
+              <button type="submit">保存 💝</button>
+              <button type="button" onclick="toggleWishForm()">取消</button>
+            </div>
+          </form>
+
+          <!-- 心愿列表 -->
+          <div id="wishList" class="wish-list">
+            <!-- 示例心愿 -->
+            <div class="wish-card" data-priority="high">
+              <div class="wish-header">
+                <div class="wish-priority">迫不及待 ✨</div>
+                <div class="wish-actions">
+                  <button
+                    class="complete-btn"
+                    onclick="completeWish(this.closest('.wish-card'))"
+                  >
+                    ✓
+                  </button>
+                  <button
+                    class="edit-btn"
+                    onclick="editWish(this.closest('.wish-card'))"
+                  >
+                    ✎
+                  </button>
+                  <button
+                    class="delete-btn"
+                    onclick="deleteWish(this.closest('.wish-card'))"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+              <h3>一起去看极光</h3>
+              <p>去北欧看一次梦幻的极光，在浪漫的夜空下许愿 🌌</p>
+              <div class="wish-status">未完成</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="wishlist.js"></script>
+  </body>
+</html>

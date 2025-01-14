@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>纪念日 - 我们的恋爱日记 ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>✨ 我们的纪念日 ✨</h1>
+        <p class="subtitle">记录每一个值得纪念的日子</p>
+        <!-- 音乐播放器 -->
+        <div class="music-player">
+          <audio id="audioPlayer" controls>
+            <source
+              src="C:\Users\12620\Desktop\网页\music\陈奕迅 - 无条件.mp3"
+              type="audio/mpeg"
+            />
+            您的浏览器不支持音频播放。
+          </audio>
+        </div>
+      </header>
+
+      <nav>
+        <a href="index.html" class="nav-item">首页</a>
+        <a href="photos.html" class="nav-item">照片墙</a>
+        <a href="wishlist.html" class="nav-item">想做的事</a>
+        <a href="anniversary.html" class="nav-item active">纪念日</a>
+      </nav>
+
+      <main>
+        <div class="anniversary-wall">
+          <!-- 添加纪念日按钮 -->
+          <div class="add-anniversary">
+            <button class="add-button" onclick="toggleAnniversaryForm()">
+              🎈 添加纪念日
+            </button>
+          </div>
+
+          <!-- 添加纪念日的表单 -->
+          <form id="anniversaryForm" class="anniversary-form hidden">
+            <input
+              type="text"
+              id="eventTitle"
+              placeholder="纪念日标题"
+              required
+            />
+            <input type="date" id="eventDate" required />
+            <select id="eventType" required>
+              <option value="oneTime">一次性纪念日</option>
+              <option value="yearly">每年纪念</option>
+              <option value="monthly">每月纪念</option>
+            </select>
+            <textarea
+              id="eventDescription"
+              placeholder="这个日子为什么特别..."
+            ></textarea>
+            <div class="form-buttons">
+              <button type="submit">保存 💝</button>
+              <button type="button" onclick="toggleAnniversaryForm()">
+                取消
+              </button>
+            </div>
+          </form>
+
+          <!-- 纪念日展示区域 -->
+          <div id="anniversaryList" class="anniversary-list">
+            <!-- 示例纪念日 -->
+            <div class="anniversary-card">
+              <div class="anniversary-header">
+                <div class="anniversary-type">💑 每年纪念</div>
+                <div class="anniversary-actions">
+                  <button
+                    class="edit-btn"
+                    onclick="editAnniversary(this.closest('.anniversary-card'))"
+                  >
+                    ✎
+                  </button>
+                  <button
+                    class="delete-btn"
+                    onclick="deleteAnniversary(this.closest('.anniversary-card'))"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+              <h3>我们在一起的日子</h3>
+              <div class="countdown">
+                <div class="countdown-number">365</div>
+                <div class="countdown-text">天</div>
+              </div>
+              <p class="anniversary-date">2024年11月16日</p>
+              <p class="anniversary-desc">
+                这一天，我们开始了甜蜜的恋爱之旅 💕
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="anniversary.js"></script>
+  </body>
+</html>
